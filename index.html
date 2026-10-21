@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodFlow | Restaurant Queue Management System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <header>
+        <div>
+          <h1>🍽 FoodFlow</h1>
+          <p>Restaurant Queue Management System</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <button class="primary-btn" style="background:#6366f1; padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="resetDefaultOrders()">
+            <i class="fa-solid fa-rotate-left"></i> Reset 20 Defaults
+          </button>
+          <div class="clock">
+            <i class="fa-regular fa-clock"></i>
+            <span id="time">10:45 AM</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="dashboard">
+        <div class="stat waiting">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <h2 id="waitingCount">0</h2>
+          <p>Waiting</p>
+        </div>
+
+        <div class="stat preparing">
+          <i class="fa-solid fa-fire-burner"></i>
+          <h2 id="preparingCount">0</h2>
+          <p>Preparing</p>
+        </div>
+
+        <div class="stat completed">
+          <i class="fa-solid fa-circle-check"></i>
+          <h2 id="completedCount">0</h2>
+          <p>Completed</p>
+        </div>
+
+        <div class="stat total">
+          <i class="fa-solid fa-bowl-food"></i>
+          <h2 id="totalCount">0</h2>
+          <p>Total Orders</p>
+        </div>
+      </section>
+
+      <!-- ORDER FORM -->
+      <section class="card">
+        <h2>Add New Order</h2>
+
+        <div class="form-grid">
+          <div>
+            <label>Customer Name</label>
+            <input type="text" id="customerName" placeholder="Patrick Nyamekye" />
+          </div>
+
+          <div>
+            <label>Food Item</label>
+            <input type="text" id="foodOrder" placeholder="Jollof Rice" />
+          </div>
+
+          <div>
+            <label>Table Number</label>
+            <input type="number" id="tableNumber" placeholder="5" />
+          </div>
+
+          <div>
+            <label>Priority</label>
+            <select id="priority">
+              <option>Normal</option>
+              <option>VIP</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="primary-btn" onclick="enqueueOrder()">
+          <i class="fa-solid fa-plus"></i>
+          Add Order
+        </button>
+      </section>
+
+      <!-- SEARCH -->
+      <section class="card" style="padding: 1rem 1.5rem;">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search customer, food, table or ID..."
+          />
+        </div>
+      </section>
+
+      <!-- ORDERS QUEUE -->
+      <section class="card">
+        <div class="section-title">
+          <h2>Current Queue</h2>
+          <span id="queueSize">0 Orders</span>
+        </div>
+
+        <div id="orderList"></div>
+      </section>
+
+      <!-- FIFO ACTIONS -->
+      <section class="actions">
+        <button class="prepare" onclick="processNextOrder()">
+          <i class="fa-solid fa-utensils"></i>
+          Prepare Next
+        </button>
+
+        <button class="front" onclick="completeFrontOrder()">
+          <i class="fa-solid fa-arrow-up"></i>
+          Complete Front
+        </button>
+
+        <button class="rear" onclick="viewRearOrder()">
+          <i class="fa-solid fa-arrow-down"></i>
+          Peek Rear
+        </button>
+
+        <button class="clear" onclick="clearQueue()">
+          <i class="fa-solid fa-trash"></i>
+          Clear Queue
+        </button>
+      </section>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container"></div>
+
+    <!-- Application Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
